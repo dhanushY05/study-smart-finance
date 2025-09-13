@@ -9,17 +9,24 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-sm hover:shadow-md transition-all duration-300",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md hover:shadow-lg transition-all duration-300",
+        ghost: "hover:bg-accent hover:text-accent-foreground transition-colors duration-200",
         link: "text-primary underline-offset-4 hover:underline",
+        hero: "bg-primary hover:bg-primary-light text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transform hover:-translate-y-0.5 transition-all duration-300 gradient-primary border-0",
+        success: "bg-success text-success-foreground hover:bg-success-light shadow-md hover:shadow-lg transition-all duration-300",
+        warning: "bg-warning text-warning-foreground hover:bg-warning-light shadow-md hover:shadow-lg transition-all duration-300",
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        lg: "h-11 rounded-md px-8 text-base",
+        xl: "h-12 rounded-lg px-10 text-lg",
         icon: "h-10 w-10",
       },
     },
