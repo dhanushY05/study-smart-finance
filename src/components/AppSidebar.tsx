@@ -32,42 +32,36 @@ const navigationItems = [
     badge: null 
   },
   { 
-    title: "Analytics", 
-    url: "/analytics", 
-    icon: BarChart3,
+    title: "Expenses", 
+    url: "/expenses", 
+    icon: Receipt,
     badge: null 
   },
   { 
     title: "Goals", 
     url: "/goals", 
     icon: Target,
-    badge: "3" 
+    badge: "4" 
   },
   { 
-    title: "Transactions", 
-    url: "/transactions", 
-    icon: Receipt,
-    badge: null 
+    title: "Budget Alerts", 
+    url: "/alerts", 
+    icon: BarChart3,
+    badge: "3" 
   },
 ]
 
 const quickActions = [
   { 
-    title: "Budget Planner", 
-    url: "/budget", 
-    icon: Wallet,
-    badge: null 
-  },
-  { 
-    title: "Expense Tracker", 
-    url: "/expenses", 
-    icon: CreditCard,
-    badge: null 
-  },
-  { 
-    title: "Reports", 
-    url: "/reports", 
+    title: "AI Insights", 
+    url: "/insights", 
     icon: TrendingUp,
+    badge: null 
+  },
+  { 
+    title: "Support", 
+    url: "/support", 
+    icon: Settings,
     badge: null 
   },
 ]
@@ -144,7 +138,7 @@ export function AppSidebar() {
         {/* Quick Actions */}
         <SidebarGroup className="mb-6">
           <SidebarGroupLabel className="text-sidebar-foreground/80 text-sm font-medium mb-2">
-            {!isCollapsed && "Quick Actions"}
+            {!isCollapsed && "Tools & Support"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-2">
@@ -168,22 +162,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Settings at bottom */}
-        <div className="mt-auto">
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild className="rounded-lg">
-                <NavLink 
-                  to="/settings" 
-                  className={getNavClassName}
-                >
-                  <Settings className="h-5 w-5 shrink-0" />
-                  {!isCollapsed && <span className="ml-3">Settings</span>}
-                </NavLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </div>
+        {/* Settings at bottom - removed since it's now in quick actions */}
       </SidebarContent>
     </Sidebar>
   )
