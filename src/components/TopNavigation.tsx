@@ -1,15 +1,24 @@
 import { NavLink } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Bell, 
-  Search, 
-  User, 
+import {
+  Bell,
+  Search,
+  User,
   Menu,
   PieChart,
-  AlertTriangle
+  LogOut,
 } from "lucide-react"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { useAuth } from "@/hooks/useAuth"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const navigationItems = [
   { title: "Dashboard", url: "/" },
