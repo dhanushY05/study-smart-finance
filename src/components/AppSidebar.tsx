@@ -76,9 +76,11 @@ export function AppSidebar() {
   const isActive = (path: string) => currentPath === path
   
   const getNavClassName = ({ isActive }: { isActive: boolean }) =>
-    isActive 
-      ? "bg-primary text-primary-foreground font-medium shadow-sm" 
-      : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+    `flex items-center w-full px-3 py-2 rounded-lg transition-colors ${
+      isActive
+        ? "bg-primary text-primary-foreground font-medium shadow-sm"
+        : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+    }`
 
   return (
     <Sidebar
