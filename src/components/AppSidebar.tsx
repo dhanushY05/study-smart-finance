@@ -146,12 +146,12 @@ export function AppSidebar() {
             <SidebarMenu className="space-y-2">
               {quickActions.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="rounded-lg">
-                    <NavLink 
-                      to={item.url} 
-                      end 
-                      className={getNavClassName}
-                    >
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.url)}
+                    className="rounded-lg text-sidebar-foreground data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
+                  >
+                    <NavLink to={item.url} end>
                       <item.icon className="h-5 w-5 shrink-0" />
                       {!isCollapsed && (
                         <span className="ml-3">{item.title}</span>
