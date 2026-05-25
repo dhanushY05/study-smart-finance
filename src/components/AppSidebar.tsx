@@ -76,9 +76,11 @@ export function AppSidebar() {
   const isActive = (path: string) => currentPath === path
   
   const getNavClassName = ({ isActive }: { isActive: boolean }) =>
-    isActive 
-      ? "bg-primary text-primary-foreground font-medium shadow-sm" 
-      : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+    `flex items-center w-full px-3 py-2 rounded-lg transition-colors ${
+      isActive
+        ? "bg-primary text-primary-foreground font-medium shadow-sm"
+        : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+    }`
 
   return (
     <Sidebar
@@ -110,12 +112,12 @@ export function AppSidebar() {
             <SidebarMenu className="space-y-2">
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="rounded-lg">
-                    <NavLink 
-                      to={item.url} 
-                      end 
-                      className={getNavClassName}
-                    >
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.url)}
+                    className="rounded-lg text-sidebar-foreground data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
+                  >
+                    <NavLink to={item.url} end>
                       <item.icon className="h-5 w-5 shrink-0" />
                       {!isCollapsed && (
                         <>
@@ -144,12 +146,12 @@ export function AppSidebar() {
             <SidebarMenu className="space-y-2">
               {quickActions.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="rounded-lg">
-                    <NavLink 
-                      to={item.url} 
-                      end 
-                      className={getNavClassName}
-                    >
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.url)}
+                    className="rounded-lg text-sidebar-foreground data-[active=true]:bg-primary data-[active=true]:text-primary-foreground"
+                  >
+                    <NavLink to={item.url} end>
                       <item.icon className="h-5 w-5 shrink-0" />
                       {!isCollapsed && (
                         <span className="ml-3">{item.title}</span>
