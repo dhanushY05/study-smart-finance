@@ -27,7 +27,9 @@ export function Layout({ children }: LayoutProps) {
 
           {/* Main Content */}
           <main className="flex-1 overflow-x-hidden">
-            {children}
+            <div className="container mx-auto p-6 max-w-7xl">
+              {children}
+            </div>
           </main>
         </div>
       </div>
