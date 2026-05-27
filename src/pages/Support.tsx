@@ -256,31 +256,32 @@ export default function Support() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6">
+          {submitted && (
+            <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 flex items-center gap-2 text-success text-sm">
+              <CheckCircle className="h-4 w-4" /> Thanks! Your message was received.
+            </div>
+          )}
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter your full name" />
+                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Enter your full name" required maxLength={100} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="Enter your email" />
+                <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Enter your email" required maxLength={255} />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" placeholder="What can we help you with?" />
+              <Input id="subject" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} placeholder="What can we help you with?" required maxLength={200} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">Message</Label>
-              <Textarea 
-                id="message" 
-                placeholder="Describe your issue or question in detail..."
-                rows={6}
-              />
+              <Textarea id="message" rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Describe your issue or question in detail..." required maxLength={5000} />
             </div>
-            <Button type="submit" variant="hero" className="w-full md:w-auto">
-              Send Message
+            <Button type="submit" variant="hero" className="w-full md:w-auto" disabled={submitting}>
+              {submitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </CardContent>
