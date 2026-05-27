@@ -38,7 +38,7 @@ export function HeroSection() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
               Take control of your finances with AI-powered expense tracking, 
               predictive analytics, and smart budgeting tools designed specifically for students.
             </p>
