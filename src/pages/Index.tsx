@@ -6,7 +6,7 @@ import { ExpenseTracker } from "@/components/ExpenseTracker";
 const Index = () => {
   return (
     <div className="space-y-12">
-      <div className="-mx-6 -mt-6">
+      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen -mt-6">
         <HeroSection />
       </div>
       
