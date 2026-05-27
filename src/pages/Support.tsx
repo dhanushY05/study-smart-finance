@@ -1,9 +1,14 @@
+import { useState } from "react"
+import { z } from "zod"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { useAuth } from "@/hooks/useAuth"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "@/hooks/use-toast"
 import { 
   MessageCircle, 
   Mail,
@@ -17,6 +22,13 @@ import {
   CheckCircle,
   Star
 } from "lucide-react"
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  subject: z.string().trim().min(1, "Subject is required").max(200),
+  message: z.string().trim().min(10, "Message should be at least 10 characters").max(5000),
+})
 
 const faqs = [
   {
@@ -106,6 +118,37 @@ const testimonials = [
 ]
 
 export default function Support() {
+  const { user } = useAuth()
+  const [form, setForm] = useState({ name: "", email: user?.email ?? "", subject: "", message: "" })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const parsed = contactSchema.safeParse(form)
+    if (!parsed.success) {
+      toast({ title: "Please fix the form", description: parsed.error.issues[0].message, variant: "destructive" })
+      return
+    }
+    setSubmitting(true)
+    const { error } = await supabase.from("contact_messages").insert({
+      user_id: user?.id ?? null,
+      name: parsed.data.name,
+      email: parsed.data.email,
+      subject: parsed.data.subject,
+      message: parsed.data.message,
+      status: "new",
+    })
+    setSubmitting(false)
+    if (error) {
+      toast({ title: "Couldn't send message", description: error.message, variant: "destructive" })
+      return
+    }
+    setSubmitted(true)
+    setForm({ name: "", email: user?.email ?? "", subject: "", message: "" })
+    toast({ title: "Message sent!", description: "We'll get back to you soon." })
+  }
+
   return (
     <div className="space-y-8">
       {/* Page Header */}
@@ -213,31 +256,32 @@ export default function Support() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6">
+          {submitted && (
+            <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 flex items-center gap-2 text-success text-sm">
+              <CheckCircle className="h-4 w-4" /> Thanks! Your message was received.
+            </div>
+          )}
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter your full name" />
+                <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Enter your full name" required maxLength={100} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" placeholder="Enter your email" />
+                <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Enter your email" required maxLength={255} />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" placeholder="What can we help you with?" />
+              <Input id="subject" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} placeholder="What can we help you with?" required maxLength={200} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">Message</Label>
-              <Textarea 
-                id="message" 
-                placeholder="Describe your issue or question in detail..."
-                rows={6}
-              />
+              <Textarea id="message" rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Describe your issue or question in detail..." required maxLength={5000} />
             </div>
-            <Button type="submit" variant="hero" className="w-full md:w-auto">
-              Send Message
+            <Button type="submit" variant="hero" className="w-full md:w-auto" disabled={submitting}>
+              {submitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </CardContent>
