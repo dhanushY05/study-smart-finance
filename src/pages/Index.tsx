@@ -5,33 +5,28 @@ import { ExpenseTracker } from "@/components/ExpenseTracker";
 
 const Index = () => {
   return (
-    <div className="space-y-12 overflow-x-clip">
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] -mt-6">
-        <HeroSection />
+    <div>
+      <HeroSection />
+
+      <div className="container mx-auto p-6 max-w-7xl space-y-12">
+        <section id="dashboard" className="scroll-mt-20">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold mb-2">Dashboard Overview</h2>
+            <p className="text-muted-foreground">
+              Monitor your financial health at a glance
+            </p>
+          </div>
+          <DashboardCards />
+        </section>
+
+        <section id="analytics" className="scroll-mt-20">
+          <AnalyticsCharts />
+        </section>
+
+        <section id="expenses" className="scroll-mt-20">
+          <ExpenseTracker />
+        </section>
       </div>
-      
-      
-      
-      {/* Dashboard Section */}
-      <section id="dashboard" className="scroll-mt-20">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">Dashboard Overview</h2>
-          <p className="text-muted-foreground">
-            Monitor your financial health at a glance
-          </p>
-        </div>
-        <DashboardCards />
-      </section>
-
-      {/* Analytics Section */}
-      <section id="analytics" className="scroll-mt-20">
-        <AnalyticsCharts />
-      </section>
-
-      {/* Expense Tracking Section */}
-      <section id="expenses" className="scroll-mt-20">
-        <ExpenseTracker />
-      </section>
     </div>
   );
 };
