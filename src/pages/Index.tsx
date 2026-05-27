@@ -5,14 +5,12 @@ import { ExpenseTracker } from "@/components/ExpenseTracker";
 
 const Index = () => {
   return (
-    <div className="space-y-12 overflow-x-clip">
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] -mt-6">
+    <div className="space-y-12">
+      {/* Full-bleed hero breaks out of the container */}
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen -mt-6">
         <HeroSection />
       </div>
-      
-      
-      
-      {/* Dashboard Section */}
+
       <section id="dashboard" className="scroll-mt-20">
         <div className="mb-8">
           <h2 className="text-3xl font-bold mb-2">Dashboard Overview</h2>
@@ -23,12 +21,10 @@ const Index = () => {
         <DashboardCards />
       </section>
 
-      {/* Analytics Section */}
       <section id="analytics" className="scroll-mt-20">
         <AnalyticsCharts />
       </section>
 
-      {/* Expense Tracking Section */}
       <section id="expenses" className="scroll-mt-20">
         <ExpenseTracker />
       </section>
