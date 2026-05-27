@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-dashboard.jpg"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden w-full">
       {/* Background with gradient */}
       <div className="absolute inset-0 gradient-hero opacity-90" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
