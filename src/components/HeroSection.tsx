@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-dashboard.jpg"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden w-full">
       {/* Background with gradient */}
       <div className="absolute inset-0 gradient-hero opacity-90" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
@@ -16,8 +16,8 @@ export function HeroSection() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-12 lg:py-0">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left animate-fade-in-up">
             {/* Badge */}
@@ -27,7 +27,7 @@ export function HeroSection() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Smart Finance
               <br />
               <span className="bg-gradient-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent">
@@ -38,7 +38,7 @@ export function HeroSection() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
               Take control of your finances with AI-powered expense tracking, 
               predictive analytics, and smart budgeting tools designed specifically for students.
             </p>
@@ -77,7 +77,7 @@ export function HeroSection() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button variant="hero" size="lg" className="group">
                 Get Started Free
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -91,7 +91,7 @@ export function HeroSection() {
             {/* Social proof */}
             <div className="mt-8 pt-8 border-t border-border/50">
               <p className="text-sm text-muted-foreground mb-4">Trusted by 50,000+ students worldwide</p>
-              <div className="flex items-center gap-6 opacity-60">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 opacity-60">
                 <div className="text-sm font-medium">★★★★★ 4.9/5</div>
                 <div className="text-sm">•</div>
                 <div className="text-sm">Featured on Product Hunt</div>
