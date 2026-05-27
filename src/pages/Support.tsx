@@ -118,6 +118,37 @@ const testimonials = [
 ]
 
 export default function Support() {
+  const { user } = useAuth()
+  const [form, setForm] = useState({ name: "", email: user?.email ?? "", subject: "", message: "" })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const parsed = contactSchema.safeParse(form)
+    if (!parsed.success) {
+      toast({ title: "Please fix the form", description: parsed.error.issues[0].message, variant: "destructive" })
+      return
+    }
+    setSubmitting(true)
+    const { error } = await supabase.from("contact_messages").insert({
+      user_id: user?.id ?? null,
+      name: parsed.data.name,
+      email: parsed.data.email,
+      subject: parsed.data.subject,
+      message: parsed.data.message,
+      status: "new",
+    })
+    setSubmitting(false)
+    if (error) {
+      toast({ title: "Couldn't send message", description: error.message, variant: "destructive" })
+      return
+    }
+    setSubmitted(true)
+    setForm({ name: "", email: user?.email ?? "", subject: "", message: "" })
+    toast({ title: "Message sent!", description: "We'll get back to you soon." })
+  }
+
   return (
     <div className="space-y-8">
       {/* Page Header */}
