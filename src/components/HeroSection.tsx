@@ -91,7 +91,7 @@ export function HeroSection() {
             {/* Social proof */}
             <div className="mt-8 pt-8 border-t border-border/50">
               <p className="text-sm text-muted-foreground mb-4">Trusted by 50,000+ students worldwide</p>
-              <div className="flex items-center gap-6 opacity-60">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 opacity-60">
                 <div className="text-sm font-medium">★★★★★ 4.9/5</div>
                 <div className="text-sm">•</div>
                 <div className="text-sm">Featured on Product Hunt</div>
