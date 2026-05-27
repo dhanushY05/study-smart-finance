@@ -27,7 +27,7 @@ export function HeroSection() {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Smart Finance
               <br />
               <span className="bg-gradient-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent">
