@@ -1,9 +1,14 @@
+import { useState } from "react"
+import { z } from "zod"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { useAuth } from "@/hooks/useAuth"
+import { supabase } from "@/integrations/supabase/client"
+import { toast } from "@/hooks/use-toast"
 import { 
   MessageCircle, 
   Mail,
@@ -17,6 +22,13 @@ import {
   CheckCircle,
   Star
 } from "lucide-react"
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Enter a valid email").max(255),
+  subject: z.string().trim().min(1, "Subject is required").max(200),
+  message: z.string().trim().min(10, "Message should be at least 10 characters").max(5000),
+})
 
 const faqs = [
   {
